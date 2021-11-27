@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'jobproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',
+        'NAME': 'job_board',
         'USER': 'root',
-        'PASSWORD': 'your-password-goes-here',
-        'HOST': 'localhost',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
