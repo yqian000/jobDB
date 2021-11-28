@@ -11,6 +11,7 @@ from rest_framework import generics
 from .serializers import *
 from .models import *
 from .forms import RegisterForm, LoginForm
+from . import utility
 
 # Create your views here.
 
@@ -39,7 +40,7 @@ def login(request):
 
 			if user is not None:
 				auth_login(request, user)
-				return redirect('job')
+				return redirect('/job/main')
 			else:
 				message = "Incorrect username or password."
 
@@ -53,6 +54,32 @@ def logout(request):
 
 def home(request):
 	return render(request, "job/home.html", {})
+
+
+def main(request):
+	return render(request, "job/main.html")
+
+
+def postjob(request):
+	if request.method == 'GET':
+		return render(request, "job/postjob.html")
+
+	else:
+		title = request.POST.get("job_title")
+		company = request.POST.get("company")
+		type = request.POST.get("job_type")
+		level = request.POST.get("job_level")
+		address = request.POST.get("address")
+		city = request.POST.get("city")
+		state = request.POST.get("state")
+		zipcode = request.POST.get("job_zipcode")
+		description = request.POST.get("job_description")
+		userID = request.user.id
+		utility.post_new_job(title, company, type, level, address, city, state, zipcode, description, userID)
+
+		return render(request, "job/postjob.html")
+
+
 
 
 class JobViewOrCreate(generics.ListCreateAPIView):

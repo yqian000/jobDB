@@ -1,0 +1,28 @@
+{% extends 'job/base.html' %}
+
+{% block content %}
+
+<h1 class="text-center">This page shows all posted job</h1>
+</br>
+
+<div class="container">
+    <a href="/job/main/"> Go Back To Main Page</a>
+    <h3>Post a new job here</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="job_title" placeholder="Job Title"><br>
+        <input type="text" name="company" placeholder="Company"><br>
+        <input type="text" name="job_type" placeholder="Job Type"><br>
+        <input type="text" name="job_level" placeholder="Job Level"><br>
+        <input type="text" name="address" placeholder="Street Address"><br>
+        <input type="number" name="job_zipcode" placeholder="zipcode"><br>
+        <input type="text" name="city" placeholder="City"><br>
+        <input type="text" name="state" placeholder="State, Ex: NY"><br>
+        <textarea name="job_description" rows="4" cols="50">
+        </textarea>
+        <button type="submit"> Post </button>
+    </form>
+</div>
+
+{% endblock %}

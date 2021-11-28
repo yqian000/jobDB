@@ -9,4 +9,6 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('job/', views.JobViewOrCreate.as_view(), name='job'),
     path('job/<int:pk>/', views.JobUpdateOrDelete.as_view()),
+    path('job/main/', views.main),
+    path('job/postjob/', views.postjob),
 ]
