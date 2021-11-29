@@ -8,8 +8,19 @@
 <div class="container">
     <a href="/job/postjob"> Click here to post new jobs</a>
     <br>
-    <h3> fake post 1</h3>
-    <h3> fake post 2</h3>
+    <a href="/job/myposts"> Click here to see all my posts</a>
+    <br>
+
+    {% for post in all_posts %}
+        <h3>{{ post.title }}, {{ post.company }} </h3>
+        <p>Posted Date: {{ post.post_date }}</p>
+        <p>Job Type : {{post.job_type}} </p>
+        <p>Job Level:{{ post.job_level}} </p>
+        <p>Work Location: {{post.location }} </p>
+        <h5>Description: </h5>
+        <p>{{post.job_description}}</p>
+    <hr>
+    {% endfor %}
 </div>
 
 {% endblock %}

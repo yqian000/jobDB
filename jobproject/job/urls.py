@@ -11,4 +11,5 @@ urlpatterns = [
     path('job/<int:pk>/', views.JobUpdateOrDelete.as_view()),
     path('job/main/', views.main),
     path('job/postjob/', views.postjob),
+    path('job/myposts', views.myposts),
 ]

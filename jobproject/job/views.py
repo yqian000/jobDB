@@ -48,16 +48,21 @@ def login(request):
 	context = {'form': form, 'msg': message}
 	return render(request, "job/login.html", context)
 
+
 def logout(request):
 	auth_logout(request)
 	return redirect('home')
+
 
 def home(request):
 	return render(request, "job/home.html", {})
 
 
 def main(request):
-	return render(request, "job/main.html")
+	all_posts = JobPost.objects.all()
+	return render(request, "job/main.html", {
+		"all_posts": all_posts
+	})
 
 
 def postjob(request):
@@ -80,6 +85,17 @@ def postjob(request):
 		return render(request, "job/postjob.html")
 
 
+
+def myposts(request):
+	if request.method == "POST":
+		postID = int(request.POST['postID'])
+		JobPost.objects.get(id=postID).delete()
+
+
+	all_myposts = JobPost.objects.filter(poster_id=request.user.id)
+	return render(request, "job/myposts.html",{
+		"myposts": all_myposts
+	})
 
 
 class JobViewOrCreate(generics.ListCreateAPIView):
