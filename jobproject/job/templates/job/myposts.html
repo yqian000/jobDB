@@ -17,6 +17,12 @@
             <button type="submit"> Delete </button>
         </form>
 
+        <form action="/job/showUpdatePost" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="postID" value={{ post.id }}>
+            <button> Update </button>
+        </form>
+
         <hr>
     {% endfor %}
 </div>
