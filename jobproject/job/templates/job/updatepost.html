@@ -1,0 +1,35 @@
+{% extends 'job/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block navEle %}
+<a href="/logout" class="btn btn-outline-success my-2 my-sm-0" role="button">Log out</a>
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">This page update a posted job</h1>
+</br>
+
+<div class="container">
+    <a href="/job/main/"> Go Back To Main Page</a>
+    <br>
+    <form action="/job/updatePost" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="postID" value="{{ post.id }}">
+        <input type="text" name="job_title" value="{{ post.title }}"><br>
+        <input type="text" name="company" value="{{ post.company }}"><br>
+        <input type="text" name="job_type" value="{{ post.job_type }}"><br>
+        <input type="text" name="job_level" value="{{ post.job_level }}"><br>
+        <input type="text" name="address" value="{{ post.location.street_address }}"><br>
+        <input type="number" name="job_zipcode" value="{{ post.location.zipcode_id }}"><br>
+        <input type="text" name="city" value="{{ post.location.zipcode.city }}"><br>
+        <input type="text" name="state" value="{{ post.location.zipcode.state }}"><br>
+        <textarea name="job_description" rows="4" cols="50">{{ post.job_description }}
+        </textarea>
+        <br>
+        <button type="submit"> Update </button>
+    </form>
+
+</div>
+
+{% endblock %}

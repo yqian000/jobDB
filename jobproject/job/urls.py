@@ -12,4 +12,6 @@ urlpatterns = [
     path('job/main/', views.main),
     path('job/postjob/', views.postjob),
     path('job/myposts', views.myposts),
+    path('job/showUpdatePost', views.showUpdatePost),
+    path('job/updatePost', views.updatePost),
 ]

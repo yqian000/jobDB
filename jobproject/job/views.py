@@ -102,6 +102,28 @@ def myposts(request):
 	})
 
 
+def showUpdatePost(request):
+	postID = request.POST['postID']
+	target_post = JobPost.objects.get(id=postID)
+	return render(request, "job/updatepost.html",{
+		"post": target_post
+	})
+
+
+def updatePost(request):
+	postID = request.POST['postID']
+	title = request.POST['job_title']
+	company = request.POST['company']
+	job_type = request.POST['job_type']
+	job_level = request.POST['job_level']
+	address = request.POST['address']
+	zipcode = request.POST['job_zipcode']
+	city = request.POST['city']
+	state = request.POST['state']
+	job_description = request.POST['job_description']
+	utility.update_post(postID, title, company, job_type,job_level,address, zipcode, city, state, job_description)
+	return redirect('/job/myposts')
+
 class JobViewOrCreate(generics.ListCreateAPIView):
 	queryset = JobPost.objects.all()
 	serializer_class = JobSerializer
