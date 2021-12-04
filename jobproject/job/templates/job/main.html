@@ -1,8 +1,12 @@
 {% extends 'job/base.html' %}
 
+{% block navEle %}
+<a href="/logout" class="btn btn-outline-success my-2 my-sm-0" role="button">Log out</a>
+{% endblock %}
+
 {% block content %}
 
-<h1 class="text-center">This page shows all posted job</h1>
+<h4 class="text-center">All Job Posts</h4>
 </br>
 
 <div class="container">
@@ -12,14 +16,18 @@
     <br>
 
     {% for post in all_posts %}
-        <h3>{{ post.title }}, {{ post.company }} </h3>
-        <p>Posted Date: {{ post.post_date }}</p>
-        <p>Job Type : {{post.job_type}} </p>
-        <p>Job Level:{{ post.job_level}} </p>
-        <p>Work Location: {{post.location }} </p>
-        <h5>Description: </h5>
-        <p>{{post.job_description}}</p>
-    <hr>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}, {{ post.company }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ post.post_date }}</h6>
+            <p class="card-text">Job Type: {{post.job_type}} </p>
+            <p class="card-text">Job Level: {{ post.job_level}} </p>
+            <p class="card-text">Work Location: {{post.location }} </p>
+            <p class="card-text">Description: {{post.job_description }} </p>
+          </div>
+        </div>
+
     {% endfor %}
 </div>
 

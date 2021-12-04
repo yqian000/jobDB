@@ -3,5 +3,5 @@ from .models import *
 
 class JobSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Job
+		model = JobPost
 		fields = '__all__'

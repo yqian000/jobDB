@@ -10,7 +10,7 @@ from rest_framework import generics
 
 from .serializers import *
 from .models import *
-from .forms import RegisterForm, LoginForm
+from .forms import *
 from . import utility
 
 # Create your views here.
@@ -67,22 +67,26 @@ def main(request):
 
 def postjob(request):
 	if request.method == 'GET':
-		return render(request, "job/postjob.html")
+		form = JobForm()
+		return render(request, "job/postjob.html", {'form': form})
 
 	else:
-		title = request.POST.get("job_title")
-		company = request.POST.get("company")
-		type = request.POST.get("job_type")
-		level = request.POST.get("job_level")
-		address = request.POST.get("address")
-		city = request.POST.get("city")
-		state = request.POST.get("state")
-		zipcode = request.POST.get("job_zipcode")
-		description = request.POST.get("job_description")
-		userID = request.user.id
-		utility.post_new_job(title, company, type, level, address, city, state, zipcode, description, userID)
+		form = JobForm(request.POST)
+		if form.is_valid():
+			title = request.POST.get("title")
+			company = request.POST.get("company")
+			type = request.POST.get("type")
+			level = request.POST.get("level")
+			address = request.POST.get("address")
+			city = request.POST.get("city")
+			state = request.POST.get("state")
+			zipcode = request.POST.get("zipcode")
+			description = request.POST.get("description")
+			userID = request.user.id
+			utility.post_new_job(title, company, type, level, address, city, state, zipcode, description, userID)
 
-		return render(request, "job/postjob.html")
+	form = JobForm()
+	return render(request, "job/postjob.html", {'form': form})
 
 
 
@@ -99,7 +103,7 @@ def myposts(request):
 
 
 class JobViewOrCreate(generics.ListCreateAPIView):
-	queryset = Job.objects.all()
+	queryset = JobPost.objects.all()
 	serializer_class = JobSerializer
 
 class JobUpdateOrDelete(generics.RetrieveUpdateDestroyAPIView):

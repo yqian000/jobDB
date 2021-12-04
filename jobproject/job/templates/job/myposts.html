@@ -1,8 +1,12 @@
 {% extends 'job/base.html' %}
 
+{% block navEle %}
+<a href="/logout" class="btn btn-outline-success my-2 my-sm-0" role="button">Log out</a>
+{% endblock %}
+
 {% block content %}
 <div class="container">
-    <h1>This page shows all your posts</h1>
+    <h4 class="text-center">My Job Posts</h4>
     <a href="/job/main/"> Go Back To Main Page</a>
     {% for post in myposts %}
         <form action="" method="POST">

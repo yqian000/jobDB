@@ -28,3 +28,23 @@ class LoginForm(forms.Form):
             }
         )
     )
+
+
+class JobForm(forms.Form):
+    title = forms.CharField(
+        widget = forms.TextInput(attrs={'placeholder': 'e.g. Software Engineer'}))
+    company = forms.CharField(
+        widget = forms.TextInput(attrs={'placeholder': 'e.g. Google'}))
+    type = forms.CharField(
+        widget = forms.TextInput(attrs={'placeholder': 'e.g. Engineering'}))
+    level = forms.CharField(
+        widget = forms.TextInput(attrs={'placeholder': 'e.g. Entry, intermediate, or senior'}))
+    address = forms.CharField(
+        widget = forms.TextInput(attrs={'placeholder': 'e.g. 123 St'}))
+    zipcode = forms.IntegerField()
+    city = forms.CharField(
+        widget = forms.TextInput(attrs={'placeholder': 'e.g. New York'}))
+    state = forms.CharField(
+        widget = forms.TextInput(attrs={'placeholder': 'e.g. NY'}))
+    description = forms.CharField(
+        widget = forms.Textarea(attrs={'placeholder': '...'}))
