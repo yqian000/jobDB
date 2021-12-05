@@ -40,7 +40,7 @@ def login(request):
 
 			if user is not None:
 				auth_login(request, user)
-				return redirect('/job/main')
+				return redirect('/job/main/')
 			else:
 				message = "Incorrect username or password."
 
@@ -66,11 +66,7 @@ def main(request):
 
 
 def postjob(request):
-	if request.method == 'GET':
-		form = JobForm()
-		return render(request, "job/postjob.html", {'form': form})
-
-	else:
+	if request.method == 'POST':
 		form = JobForm(request.POST)
 		if form.is_valid():
 			title = request.POST.get("title")
@@ -88,48 +84,41 @@ def postjob(request):
 	form = JobForm()
 	return render(request, "job/postjob.html", {'form': form})
 
-
-
 def myposts(request):
-	if request.method == "POST":
-		postID = int(request.POST['postID'])
-		JobPost.objects.get(id=postID).delete()
-
-
 	all_myposts = JobPost.objects.filter(poster_id=request.user.id)
 	return render(request, "job/myposts.html",{
 		"myposts": all_myposts
 	})
 
+def updatePost(request, pk=None):
+	if request.method == "GET":
+		target_post = JobPost.objects.get(id=pk)
+		return render(request, "job/updatepost.html",{
+			"post": target_post
+		})
+	else:
+		title = request.POST['job_title']
+		company = request.POST['company']
+		job_type = request.POST['job_type']
+		job_level = request.POST['job_level']
+		address = request.POST['address']
+		zipcode = request.POST['job_zipcode']
+		city = request.POST['city']
+		state = request.POST['state']
+		job_description = request.POST['job_description']
+		utility.update_post(pk, title, company, job_type,job_level,address, zipcode, city, state, job_description)
+	return redirect('/job/myposts/')
 
-def showUpdatePost(request):
-	postID = request.POST['postID']
-	target_post = JobPost.objects.get(id=postID)
-	return render(request, "job/updatepost.html",{
-		"post": target_post
-	})
-
-
-def updatePost(request):
-	postID = request.POST['postID']
-	title = request.POST['job_title']
-	company = request.POST['company']
-	job_type = request.POST['job_type']
-	job_level = request.POST['job_level']
-	address = request.POST['address']
-	zipcode = request.POST['job_zipcode']
-	city = request.POST['city']
-	state = request.POST['state']
-	job_description = request.POST['job_description']
-	utility.update_post(postID, title, company, job_type,job_level,address, zipcode, city, state, job_description)
-	return redirect('/job/myposts')
+def deletePost(request, pk=None):
+	JobPost.objects.get(id=pk).delete()
+	return redirect('/job/myposts/')
 
 class JobViewOrCreate(generics.ListCreateAPIView):
 	queryset = JobPost.objects.all()
 	serializer_class = JobSerializer
 
 class JobUpdateOrDelete(generics.RetrieveUpdateDestroyAPIView):
-	queryset = Job.objects.all()
+	queryset = JobPost.objects.all()
 	serializer_class = JobSerializer
 
 

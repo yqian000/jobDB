@@ -11,7 +11,7 @@ urlpatterns = [
     path('job/<int:pk>/', views.JobUpdateOrDelete.as_view()),
     path('job/main/', views.main),
     path('job/postjob/', views.postjob),
-    path('job/myposts', views.myposts),
-    path('job/showUpdatePost', views.showUpdatePost),
-    path('job/updatePost', views.updatePost),
+    path('job/myposts/', views.myposts),
+    path('job/updatePost/<int:pk>/', views.updatePost, name='update'),
+    path('job/deletePost/<int:pk>/', views.deletePost, name='delete'),
 ]

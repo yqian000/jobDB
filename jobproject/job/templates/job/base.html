@@ -19,7 +19,7 @@
     <nav class="navbar navbar-light bg-light justify-content-between">
       <a href="/" class="navbar-brand">Job Database</a>
       <form class="form-inline">
-        <div id="navEle", name="navEle", style="padding-left:20px; padding-right:20px">
+        <div id="navEle", name="navEle">
           {% block navEle %}
           <a href="/login" class="btn btn-outline-success my-2 my-sm-0" role="button">Login</a>
           <a href="/register" class="btn btn-outline-success my-2 my-sm-0" role="button">Register</a>
@@ -28,7 +28,19 @@
       </form>
     </nav>
 
-    <div id="content", name="content", style="padding-left:20px; padding-right:20px">
+    <div id="subNav", name="subNav">
+      {% block subNav %}
+      <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <a class="btn btn-outline-dark" href="/job/main/"> View All Job Posts </a>
+          <a class="btn btn-outline-dark" href="/job/myposts/"> View My Job Posts </a>
+          <a class="btn btn-outline-dark" href="/job/postjob/"> Create a New Job Post </a>
+        </form>
+      </nav>
+      {% endblock %}
+    </div>
+
+    <div id="content", name="content", style="padding-left:20px; padding-right:20px; padding-top:20px">
       {% block content %}
       {% endblock %}
     </div>

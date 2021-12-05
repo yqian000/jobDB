@@ -7,27 +7,60 @@
 
 {% block content %}
 
-<h1 class="text-center">This page update a posted job</h1>
-</br>
-
 <div class="container">
-    <a href="/job/main/"> Go Back To Main Page</a>
     <br>
-    <form action="/job/updatePost" method="POST">
+    <form method="POST">
         {% csrf_token %}
-        <input type="hidden" name="postID" value="{{ post.id }}">
-        <input type="text" name="job_title" value="{{ post.title }}"><br>
-        <input type="text" name="company" value="{{ post.company }}"><br>
-        <input type="text" name="job_type" value="{{ post.job_type }}"><br>
-        <input type="text" name="job_level" value="{{ post.job_level }}"><br>
-        <input type="text" name="address" value="{{ post.location.street_address }}"><br>
-        <input type="number" name="job_zipcode" value="{{ post.location.zipcode_id }}"><br>
-        <input type="text" name="city" value="{{ post.location.zipcode.city }}"><br>
-        <input type="text" name="state" value="{{ post.location.zipcode.state }}"><br>
-        <textarea name="job_description" rows="4" cols="50">{{ post.job_description }}
+
+        <legend class="border-bottom mb-4 row justify-content-center">Update job post</legend>
+
+        <div class="form-group">
+            <label for="2">Title</label>
+            <input type="text" class="form-control" id="2" name="job_title" value="{{ post.title }}">
+        </div>
+
+        <div class="form-group">
+            <label for="3">Company</label>
+            <input type="text" class="form-control" id="3" name="company" value="{{ post.company }}">
+        </div>
+
+        <div class="form-group">
+            <label for="4">Type</label>
+            <input type="text" class="form-control" id="4" name="job_type" value="{{ post.job_type }}">
+        </div>
+
+        <div class="form-group">
+            <label for="5">Level</label>
+            <input type="text" class="form-control" id="5" name="job_level" value="{{ post.job_level }}">
+        </div>
+
+        <div class="form-group">
+            <label for="6">Address</label>
+            <input type="text" class="form-control" id="6" name="address" value="{{ post.location.street_address }}">
+        </div>
+
+        <div class="form-group">
+            <label for="7">Zipcode</label>
+            <input type="number" class="form-control" id="7" name="job_zipcode" value="{{ post.location.zipcode_id }}">
+        </div>
+
+        <div class="form-group">
+            <label for="8">City</label>
+            <input type="text" class="form-control" id="8" name="city" value="{{ post.location.zipcode.city }}">
+        </div>
+
+        <div class="form-group">
+            <label for="9">State</label>
+            <input type="text" class="form-control" id="9" name="state" value="{{ post.location.zipcode.state }}">
+        </div>
+
+        <div class="form-group">
+            <label for="10">Description</label>
+            <textarea class="form-control" id="10" name="job_description" rows="4" cols="50">{{ post.job_description }}
         </textarea>
-        <br>
-        <button type="submit"> Update </button>
+    </div>
+
+        <button type="submit" class="btn btn-primary"> Update </button>
     </form>
 
 </div>

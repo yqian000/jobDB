@@ -5,25 +5,27 @@
 {% endblock %}
 
 {% block content %}
+
+<h4 class="text-center">My Job Posts</h4>
+<p class="text-center"><small class="text-muted">Your can view, create, update, or delete your job posts.</small></p>
+
 <div class="container">
-    <h4 class="text-center">My Job Posts</h4>
-    <a href="/job/main/"> Go Back To Main Page</a>
     {% for post in myposts %}
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="postID" value={{ post.id }}>
-            <p> <b>{{ post.title }}</b>, {{ post.company }}, {{ post.post_date }}</p>
-            <p> {{ post.job_description}}</p>
-            <button type="submit"> Delete </button>
-        </form>
-
-        <form action="/job/showUpdatePost" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="postID" value={{ post.id }}>
-            <button> Update </button>
-        </form>
-
-        <hr>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{post.location }}</h6>
+            <p class="card-text">Company: {{ post.company }} </p>
+            <p class="card-text">Job Type: {{post.job_type}} </p>
+            <p class="card-text">Job Level: {{ post.job_level}} </p>
+            <p class="card-text">Description: {{post.job_description }} </p>
+            <a href="/job/updatePost/{{post.id}}/" class="card-link">Update</a>
+            <a href="/job/deletePost/{{post.id}}/" class="card-link">Delete</a>
+          </div>
+          <div class="card-footer">
+              <small class="text-muted">Posted on {{ post.post_date }}</small>
+          </div>
+        </div>
     {% endfor %}
 </div>
 
